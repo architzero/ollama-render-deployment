@@ -21,4 +21,6 @@ EXPOSE 11434
 HEALTHCHECK --interval=60s --timeout=30s --start-period=300s --retries=3 \
   CMD curl -f http://localhost:11434/api/tags || exit 1
 
+ENTRYPOINT ["/bin/bash"]
+
 CMD ["/app/start.sh"]

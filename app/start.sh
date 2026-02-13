@@ -8,8 +8,8 @@ ollama serve &
 sleep 10
 
 # Pull the model (adjust model name as needed)
-echo "Pulling DeepSeek R1-Claude 3.7 model..."
-ollama pull GandalfBaum/deepseek_r1-claude3.7
+echo "Pulling llama3.2:3b..."
+ollama pull llama3.2:3b
 
 # Alternative smaller models for testing:
 # ollama pull llama3.2:3b

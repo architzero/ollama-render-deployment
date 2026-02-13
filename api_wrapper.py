@@ -12,7 +12,7 @@ logger = logging.getLogger(__name__)
 app = FastAPI(title="Ollama API Wrapper", version="1.0.0")
 
 OLLAMA_BASE_URL = os.getenv("OLLAMA_BASE_URL", "http://localhost:11434")
-DEFAULT_MODEL = os.getenv("DEFAULT_MODEL", "GandalfBaum/deepseek_r1-claude3.7")
+DEFAULT_MODEL = os.getenv("DEFAULT_MODEL", "llama3.2:3b")
 
 class ChatRequest(BaseModel):
     message: str
@@ -62,13 +62,13 @@ async def chat(request: ChatRequest):
                 "num_predict": request.max_tokens
             }
         }
-        
+
         response = requests.post(
             f"{OLLAMA_BASE_URL}/api/generate",
             json=ollama_payload,
             timeout=120
         )
-        
+
         if response.status_code == 200:
             result = response.json()
             return ChatResponse(
@@ -84,7 +84,7 @@ async def chat(request: ChatRequest):
                 status_code=response.status_code,
                 detail=f"Ollama API error: {response.text}"
             )
-            
+
     except requests.exceptions.Timeout:
         raise HTTPException(status_code=504, detail="Request timeout")
     except requests.exceptions.ConnectionError:
