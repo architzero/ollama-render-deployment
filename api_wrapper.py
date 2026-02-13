@@ -13,6 +13,7 @@ app = FastAPI(title="Ollama API Wrapper", version="1.0.0")
 
 OLLAMA_BASE_URL = os.getenv("OLLAMA_BASE_URL", "http://localhost:11434")
 DEFAULT_MODEL = os.getenv("DEFAULT_MODEL", "llama3.2:3b")
+PORT = os.getenv("PORT", 10000)
 
 class ChatRequest(BaseModel):
     message: str
@@ -106,4 +107,4 @@ async def list_models():
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    uvicorn.run(app, host="0.0.0.0", port=PORT)
